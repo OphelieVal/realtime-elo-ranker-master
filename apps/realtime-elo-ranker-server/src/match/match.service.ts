@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { Match } from './match.entity';
 import { CreateMatchDto } from './createMatch.dto';
 
@@ -29,5 +29,27 @@ export class MatchService {
         };
         this.matchs.push(newMatch);
         return newMatch;
+    }
+
+    /**
+     * Retrieves all matches.
+     * @returns An array of all Match objects.
+     */
+    getAllMatches(): Match[] {
+        return this.matchs;
+    } 
+
+    /**
+     * Retrieves a match by its ID.
+     * @param id The ID of the match to retrieve.
+     * @returns The Match object with the specified ID.
+     * @throws BadRequestException if no match with the given ID is found.
+     */
+    getMatchById(id: number): Match {
+        const match = this.matchs.find(match => match.id === id);
+        if (!match) {
+            throw new NotFoundException(`Match with id ${id} not found.`);
+        }
+        return match;
     }
 }

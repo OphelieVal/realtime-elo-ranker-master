@@ -1,22 +1,20 @@
-import { IsInt, IsNotEmpty, IsString, Min } from "class-validator";
+// updateMatch.dto.ts
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
-/**
- * Data Transfer Object representing the basic structure of a match.
- */
 export class BaseMatchDto {
     @IsString()
     @IsNotEmpty()
-    opponent1: string;
+    playerA?: string;
     
     @IsString()
     @IsNotEmpty()
-    opponent2: string;
+    playerB?: string;
     
-    @IsInt()
-    @Min(0)
-    score1: number;
+    @IsString()
+    @IsOptional()
+    winner?: string;
     
-    @IsInt()
-    @Min(0)
-    score2: number;
+    @IsBoolean()
+    @IsOptional()
+    isDraw?: boolean;
 }

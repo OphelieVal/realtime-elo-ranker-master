@@ -1,11 +1,17 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { MatchModule } from './match/match.module';
+import { join } from 'path';
 
 @Module({
-  imports: [MatchModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'better-sqlite3',
+      database: join(__dirname, '..', 'database.sqlite'),
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+    MatchModule,
+  ],
 })
 export class AppModule {}

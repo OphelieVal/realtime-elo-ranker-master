@@ -1,7 +1,19 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+@Entity()
 export class Match {
-  id: number;
-  opponent1: string;
-  opponent2: string;
-  score1: number;
-  score2: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
+    
+    @Column()
+    playerA: string;
+    
+    @Column()
+    playerB: string;
+    
+    @Column()
+    winner: string;  // ID du gagnant, ou null si draw
+    
+    @Column({ default: false })
+    isDraw: boolean;
 }

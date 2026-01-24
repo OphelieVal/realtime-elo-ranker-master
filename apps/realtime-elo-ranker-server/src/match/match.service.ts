@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
-import { Match } from './match.entity';
-import { CreateMatchDto } from './createMatch.dto';
+import { Match } from './entities/match.entity';
+import { CreateMatchDto } from './dto/createMatch.dto';
+import { UpdateMatchDto } from './dto/updateMatch.dto';
 
 @Injectable()
 export class MatchService {
@@ -51,5 +52,34 @@ export class MatchService {
             throw new NotFoundException(`Match with id ${id} not found.`);
         }
         return match;
+    }
+
+    /**
+     * Updates a match with the given ID using the provided update data.
+     * @param id 
+     * @param updateData 
+     * @returns The updated Match object.
+     * @throws NotFoundException if no match with the given ID is found.
+     */
+    updateMatch(id: number, updateData: UpdateMatchDto): Match {
+        const match = this.getMatchById(id);
+        if (!match) {
+            throw new NotFoundException(`Match with id ${id} not found.`);
+        }
+        Object.assign(match, updateData);
+        return match;
+    }
+
+    /**
+     * Deletes a match with the given ID.
+     * @param id
+     * @throws NotFoundException if no match with the given ID is found.
+     */
+    deleteMatch(id: number): void {
+        const index = this.matchs.findIndex(match => match.id === id);
+        if (index === -1) {
+            throw new NotFoundException(`Match with id ${id} not found.`);
+        }
+        this.matchs.splice(index, 1);
     }
 }

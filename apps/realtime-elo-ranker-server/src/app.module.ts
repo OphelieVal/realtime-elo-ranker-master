@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MatchModule } from './match/match.module';
+import { PlayerModule } from './player/player.module';
 import { join } from 'path';
 
 @Module({
@@ -12,6 +13,7 @@ import { join } from 'path';
       synchronize: true,
     }),
     MatchModule,
+    PlayerModule,
   ],
 })
 export class AppModule {}

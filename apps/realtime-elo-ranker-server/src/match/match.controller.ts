@@ -1,4 +1,4 @@
-import { Controller, Get, ParseIntPipe, Param, Post, Body, ValidationPipe, Put, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, ValidationPipe, Put, Delete, Query } from '@nestjs/common';
 import { MatchService } from './match.service';
 import { Match } from './entities/match.entity';
 import { CreateMatchDto } from './dto/createMatch.dto';

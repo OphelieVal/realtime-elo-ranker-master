@@ -1,12 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Player {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn()
     id: string;
-
-    @Column()
-    name: string;
 
     @Column()
     rank : number;   

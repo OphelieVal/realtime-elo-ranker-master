@@ -1,9 +1,12 @@
 import { IsNotEmpty, IsNumber, IsString, Min } from "class-validator";
 
+/**
+ * Data Transfer Object logic for a player
+ */
 export class BasePlayerDto {
     @IsString()
     @IsNotEmpty()
-    name? : string;
+    id? : string;
     
     @IsNumber()
     @Min(1)

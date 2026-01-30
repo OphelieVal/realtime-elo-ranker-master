@@ -4,7 +4,7 @@ import { Player } from './entities/player.entity';
 import { CreatePlayerDto } from './dto/createPlayer.dto';
 import { UpdatePlayerDto } from './dto/updatePlayer.dto';
 
-@Controller('players')
+@Controller('api/player')
 export class PlayerController {
     constructor(private readonly playerService: PlayerService) {}
 
@@ -14,8 +14,8 @@ export class PlayerController {
     }
 
     @Get('query')
-    findAllQuery(@Query('name') name:string, @Query('rank') rank:number ) : string {
-        return `name: ${name}, rank: ${rank}`;
+    findAllQuery(@Query('rank') rank:number ) : string {
+        return `rank: ${rank}`;
     }
 
     @Get(':id')

@@ -1,6 +1,17 @@
-import { BaseMatchDto } from './baseMatch.dto';
+import { IsNotEmpty, IsBoolean, IsString } from "class-validator";
 
 /**
- * Data Transfer Object for creating a match, excluding scores.
+ * Data Transfer Object for creating a match.
  */
-export class CreateMatchDto extends BaseMatchDto {}
+export class CreateMatchDto {
+    @IsNotEmpty()
+    @IsString()
+    winner: string;
+
+    @IsNotEmpty()
+    @IsString()
+    loser: string;
+
+    @IsBoolean()
+    draw: boolean;
+}

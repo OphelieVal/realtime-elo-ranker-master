@@ -49,6 +49,23 @@ export class PlayerService {
     }
 
     /**
+     * Ensure that a player exists both in the database and cache
+     * @param playerId 
+     * @returns the player found or created
+     */
+    async ensurePlayer(playerId: string) : Promise<Player> {
+        let player = await this.playerRepository.findOne({ where: { id: playerId } });
+        if (!player) {
+            player = await this.createPlayer({id: playerId} as CreatePlayerDto);
+        }
+        else {
+            this.rankingCache.ensurePlayer(player.id);
+        }
+    
+        return player;
+    }
+
+    /**
      * Updates a player with the given ID using the provided update data.
      * @param id 
      * @param updateData 

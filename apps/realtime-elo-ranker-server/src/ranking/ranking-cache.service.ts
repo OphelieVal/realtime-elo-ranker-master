@@ -12,7 +12,7 @@ export class RankingCacheService {
      */
     ensurePlayer(id: string) : void {
         if (!this.ranking.has(id)) {
-            this.ranking.set(id, 0);
+            this.ranking.set(id, 1000);
         }
     }
 

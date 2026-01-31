@@ -4,7 +4,7 @@ import { Player } from './entities/player.entity';
 import { CreatePlayerDto } from './dto/createPlayer.dto';
 import { UpdatePlayerDto } from './dto/updatePlayer.dto';
 
-@Controller('api/player')
+@Controller('player')
 export class PlayerController {
     constructor(private readonly playerService: PlayerService) {}
 
@@ -30,7 +30,8 @@ export class PlayerController {
     }
 
     @Post()
-    createPlayer(@Body(new ValidationPipe({whitelist:true, forbidNonWhitelisted:true, transform: true})) body: CreatePlayerDto): Promise<Player> {
+    createPlayer(@Body() body: CreatePlayerDto): Promise<Player> {
+        console.log('BODY:', body);
         return this.playerService.createPlayer(body);
     }
 

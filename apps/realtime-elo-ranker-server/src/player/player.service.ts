@@ -5,7 +5,6 @@ import { Player } from './entities/player.entity';
 import { CreatePlayerDto } from './dto/createPlayer.dto';
 import { UpdatePlayerDto } from './dto/updatePlayer.dto';
 import { RankingCacheService } from 'src/ranking/ranking-cache.service';
-import { todo } from 'node:test';
 
 @Injectable()
 export class PlayerService {
@@ -21,7 +20,7 @@ export class PlayerService {
      * @returns The created Player object.
      */
     async createPlayer(createPlayerDto: CreatePlayerDto): Promise<Player> {
-        const newPlayer = this.playerRepository.create({...createPlayerDto, rank:0});
+        const newPlayer = this.playerRepository.create({...createPlayerDto, rank: 1000});
         await this.playerRepository.save(newPlayer);
         this.rankingCache.ensurePlayer(newPlayer.id);
         return newPlayer;

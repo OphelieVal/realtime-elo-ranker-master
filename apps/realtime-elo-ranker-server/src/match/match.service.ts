@@ -1,14 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PlayerService } from 'src/player/player.service';
 import { CreateMatchDto } from './dto/createMatch.dto';
-import { UpdatePlayerDto } from '../player/dto/updatePlayer.dto';
 import { RankingCacheService } from 'src/ranking/ranking-cache.service';
 
 @Injectable()
 export class MatchService {
   constructor(
     private readonly playerService: PlayerService,
-    private readonly updatePlayerDto : UpdatePlayerDto,
     private readonly rankingCache : RankingCacheService
   ) {}
 

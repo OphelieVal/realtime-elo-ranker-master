@@ -1,7 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
 import { RankingService } from "./ranking.service";
-import { todo } from "node:test";
-
 
 @Controller('ranking')
 export class RankingController {

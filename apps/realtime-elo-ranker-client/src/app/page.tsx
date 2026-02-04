@@ -15,6 +15,7 @@ import {
   RankingEventType,
 } from "../services/ranking/models/ranking-event";
 import { motion } from "motion/react";
+import { Toaster, toast } from "sonner";
 import postMatchResult from "../services/match/post-match-result";
 import postPlayer from "../services/player/post-player";
 
@@ -80,7 +81,7 @@ export default function Home() {
     try {
       fetchRanking(API_BASE_URL).then(setLadderData);
     } catch (error) {
-      // TODO: toast error
+      toast.error("Failed to fetch the ranking : " + error as string);
       console.error(error);
     }
     const eventSource = subscribeRankingEvents(API_BASE_URL);
@@ -95,7 +96,7 @@ export default function Home() {
       }
     };
     eventSource.onerror = (err) => {
-      // TODO: toast error
+      toast.error("Failed to subscribe ranking events")
       console.error(err);
       eventSource.close();
     };
@@ -104,6 +105,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen w-full">
+      <Toaster richColors />
       <motion.main
         className="flex flex-col gap-8 items-center sm:items-start max-w-full px-12 pt-24"
         initial={{ opacity: 0 }}

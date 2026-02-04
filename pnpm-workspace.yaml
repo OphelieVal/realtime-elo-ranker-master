@@ -30,14 +30,17 @@ catalog:
   postcss-cli: ~11.0
   react: ~19.1
   react-dom: ~19.1
-  swagger-ui-express: ~5.0
+  swagger-ui-express: 5.0.1
   tailwindcss: ~4.1
   ts-jest: ~29.4
   typescript: ~5.9.2
   yamljs: ~0.3
 
 onlyBuiltDependencies:
+  - '@nestjs/core'
   - '@scarf/scarf'
   - '@tailwindcss/oxide'
+  - better-sqlite3
   - sharp
+  - sqlite3
   - unrs-resolver

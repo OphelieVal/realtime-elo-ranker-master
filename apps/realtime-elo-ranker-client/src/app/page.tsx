@@ -81,7 +81,7 @@ export default function Home() {
     try {
       fetchRanking(API_BASE_URL).then(setLadderData);
     } catch (error) {
-      toast.error("Failed to fetch the ranking : " + error as string);
+      toast.error("Failed to fetch the ranking");
       console.error(error);
     }
     const eventSource = subscribeRankingEvents(API_BASE_URL);

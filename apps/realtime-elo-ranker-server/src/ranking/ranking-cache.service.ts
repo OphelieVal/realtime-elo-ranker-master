@@ -1,6 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { todo } from "node:test";
-
 
 @Injectable()
 export class RankingCacheService {
@@ -47,7 +45,7 @@ export class RankingCacheService {
     /**
      * Delete the cache memory. Useful for the testing
      */
-    clear() : void {
-        todo
+    clear(): void {
+        this.ranking.clear();
     }
 }

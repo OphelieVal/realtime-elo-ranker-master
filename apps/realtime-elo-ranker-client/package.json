@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nestjs/event-emitter": "^3.0.1",
     "react": "catalog:",
     "react-dom": "catalog:",
     "sonner": "^2.0.7"

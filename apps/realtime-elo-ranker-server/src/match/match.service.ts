@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { PlayerService } from 'src/player/player.service';
 import { CreateMatchDto } from './dto/createMatch.dto';
 import { RankingCacheService } from 'src/ranking/ranking-cache.service';
+import { rankingEmitter } from 'src/lib/rankingEmitter';
+import { RankingEventType } from '../../../realtime-elo-ranker-client/src/services/ranking/models/ranking-event';
 
 @Injectable()
 export class MatchService {
@@ -9,7 +11,6 @@ export class MatchService {
     private readonly playerService: PlayerService,
     private readonly rankingCache : RankingCacheService
   ) {}
-
 
   /**
    * Simulate a match playing and publish the update the ranking and database accordingly
@@ -42,6 +43,22 @@ export class MatchService {
     // Synchronisation base
     await this.playerService.updateRank(winnerPlayer.id, winnerRank);
     await this.playerService.updateRank(loserPlayer.id, loserRank);
+
+    rankingEmitter.emit("ranking", {
+      type: RankingEventType.RankingUpdate,
+      player: {
+        id: winnerPlayer.id,
+        rank: winnerRank,
+      },
+    });
+
+    rankingEmitter.emit("ranking", {
+      type: RankingEventType.RankingUpdate,
+      player: {
+        id: loserPlayer.id,
+        rank: loserRank,
+      }, 
+    })
 
     return {
       winner: { id: winnerPlayer.id, rank: winnerRank },

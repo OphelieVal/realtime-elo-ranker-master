@@ -66,22 +66,6 @@ export class PlayerService {
     }
 
     /**
-     * Updates a player with the given ID using the provided update data.
-     * @param id 
-     * @param updateData 
-     * @returns The updated Player object.
-     * @throws NotFoundException if no player with the given ID is found.
-     */
-    async updatePlayer(id: string, updateData: UpdatePlayerDto): Promise<Player> {
-        const player = await this.findPlayerById(id);
-        if (!player) {
-            throw new NotFoundException(`Player with id ${id} not found.`);
-        }
-        Object.assign(player, updateData);
-        return this.playerRepository.save(player);
-    }
-    
-    /**
      * Update the rank of a player given his id and new rank
      * @param playerId 
      * @param rank 
